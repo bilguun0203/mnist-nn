@@ -15,9 +15,12 @@ filename = [
 def download_mnist():
     base_url = "http://yann.lecun.com/exdb/mnist/"
     for name in filename:
-        print("Downloading " + name[1] + "...")
-        request.urlretrieve(base_url + name[1], name[1])
-    print("Download complete.")
+        if Path(name[1]).is_file():
+            print("Skipping " + name[1] + "")
+        else:
+            print("Downloading " + name[1] + "...")
+            request.urlretrieve(base_url + name[1], name[1])
+            print("Download complete.")
 
 
 def save_mnist():
@@ -28,6 +31,9 @@ def save_mnist():
     for name in filename[-2:]:
         with gzip.open(name[1], 'rb') as f:
             mnist[name[0]] = np.frombuffer(f.read(), np.uint8, offset=8)
+    # Normalize data
+    for k in mnist:
+        mnist[k] = mnist[k] * (1/255)
     with open("mnist.pkl", 'wb') as f:
         pickle.dump(mnist, f)
     print("Save complete.")
