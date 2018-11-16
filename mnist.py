@@ -27,13 +27,10 @@ def save_mnist():
     mnist = {}
     for name in filename[:2]:
         with gzip.open(name[1], 'rb') as f:
-            mnist[name[0]] = np.frombuffer(f.read(), np.uint8, offset=16).reshape(-1, 28 * 28)
+            mnist[name[0]] = np.frombuffer(f.read(), np.uint8, offset=16).reshape(-1, 28 * 28) * (1/255)
     for name in filename[-2:]:
         with gzip.open(name[1], 'rb') as f:
             mnist[name[0]] = np.frombuffer(f.read(), np.uint8, offset=8)
-    # Normalize data
-    for k in mnist:
-        mnist[k] = mnist[k] * (1/255)
     with open("mnist.pkl", 'wb') as f:
         pickle.dump(mnist, f)
     print("Save complete.")

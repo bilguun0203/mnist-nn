@@ -1,4 +1,5 @@
 import pickle
+import numpy as np
 
 
 # Сургалтын явцыг харуулах
@@ -19,3 +20,11 @@ def nn_load(filename):
 def nn_save(filename, nn):
     with open(filename, 'wb') as output:
         pickle.dump(nn, output, pickle.HIGHEST_PROTOCOL)
+
+
+# One Hot Encoding
+def ohe(classes, selected=None):
+    labels = np.zeros(len(classes))
+    if selected is not None:
+        labels[classes.index(selected)] = 1
+    return labels
