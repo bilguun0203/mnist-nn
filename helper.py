@@ -23,8 +23,10 @@ def nn_save(filename, nn):
 
 
 # One Hot Encoding
-def ohe(classes, selected=None):
-    labels = np.zeros(len(classes))
-    if selected is not None:
-        labels[classes.index(selected)] = 1
-    return labels
+def label2vector(classes, labels):
+    res = []
+    for (i, v) in enumerate(labels):
+        temp = np.zeros(len(classes))
+        temp[v] = 1
+        res.append(temp)
+    return res
