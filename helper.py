@@ -3,11 +3,11 @@ import numpy as np
 
 
 # Сургалтын явцыг харуулах
-def print_progress(count, total, bar_len=60):
+def print_progress(count, total, bar_len=60, loss=''):
     percent = round(100.0 * count / float(total), 1)
     filled_len = int(round(bar_len * count / float(total)))
     bar = '=' * filled_len + '-' * (bar_len - filled_len)
-    print('\r[{0}] {1}% {2}/{3}\r'.format(bar, percent, count, total), flush=True, end='\r')
+    print('\r[{0}] {1}% {2}/{3} loss: {4}\r'.format(bar, percent, count, total, loss), flush=True, end='\r')
 
 
 # Neural Network файлаас унших
@@ -23,7 +23,7 @@ def nn_save(filename, nn):
 
 
 # One Hot Encoding
-def label2vector(classes, labels):
+def one_hot_encoding(classes, labels):
     res = []
     for (i, v) in enumerate(labels):
         temp = np.zeros(len(classes))
