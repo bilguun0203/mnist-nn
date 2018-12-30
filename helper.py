@@ -7,7 +7,7 @@ def print_progress(count, total, bar_len=60, loss='', accuracy=''):
     percent = round(100.0 * count / float(total), 1)
     filled_len = int(round(bar_len * count / float(total)))
     bar = '=' * filled_len + '-' * (bar_len - filled_len)
-    print('\r[{0}] {1}% {2}/{3} loss: {4:.5f} accuracy: {5:.5f}%\r'.format(bar, percent, count, total, loss, accuracy), flush=True, end='\r')
+    print('\r[{0}] {1}% {2}/{3} loss*: {4:.3f} accuracy*: {5:.3f}%\r'.format(bar, percent, count, total, loss, accuracy), flush=True, end='\r')
 
 
 # Neural Network файлаас унших
